@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<head>
+<title>ДОБАВИТЬ ВОДИТЕЛЯ</title>
+<style>
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .input {
+        margin: 25px auto;
+        width: 350px;
+    }
+    .label-password {
+        display: block;
+        margin: 0 0 10px 10px;
+    }
+    .button {
+        height: 50px;
+        width: 330px;
+        background-color: rgb(190, 190, 190);
+        padding: 0 10px;
+        border-radius: 18px;
+        border-style: none;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        outline: none;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        min-height: 48px;
+    }
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=places" async defer></script>
+</head>
+<body style="width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column;">
+<div class="topnav">
+    <a href="/dispetcheri">Гланая</a>
+    <a href="/dispetcheri/calculate">Новая поездка</a>
+    <a class="active" href="/dispetcheri/addVoditel">Добавить водителя</a>
+    <a href="/dispetcheri/deleteVoditel">Удалить водителя</a>
+</div>
+<div style="width: 100%; height: 100%;">
+    <div style="height: 100%; width: 100%; min-width: 400px; float: left; background-color: gainsboro;">
+        <form method="POST">
+            <div style="height: 80%; margin: 0 auto;">
+                <div class="input">
+                    <label class="label-password">Имя пользователя:</label>
+                    <input class="button" id="username" type="text" class="text" name="username" placeholder="Имя пользователя" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Пароль:</label>
+                    <input class="button" id="password" type="text" class="text" name="password" placeholder="Пароль" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Номер телефона:</label>
+                    <input class="button" id="phone" type="text" class="text" name="phone" placeholder="Номер телефона" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Машина:</label>
+                    <input class="button" id="car" type="text" class="text" name="car" placeholder="Машина" tabindex="2" required />
+                </div>
+            </div>
+            <div style="margin: 0 auto;">
+                <button class="button" style="cursor: pointer; margin: auto; display: block; transform: translateY(200%);">Добавить</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

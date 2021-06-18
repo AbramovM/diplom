@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<head>
+<title>ПОЕЗДКА</title>
+<style>
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .input {
+        margin: 25px auto;
+        width: 350px;
+    }
+    .label-password {
+        display: block;
+        margin: 0 0 10px 10px;
+    }
+    .button {
+        height: 50px;
+        width: 330px;
+        background-color: rgb(190, 190, 190);
+        padding: 0 10px;
+        border-radius: 18px;
+        border-style: none;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        outline: none;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        min-height: 48px;
+    }
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    ul h2, ul h3, ul {
+        margin: 0;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=places" async defer></script>
+</head>
+<body style="width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column">
+<div class="topnav">
+    <a href="/dispetcheri">Гланая</a>
+    <a href="/dispetcheri/calculate">Новая поездка</a>
+    <a href="/dispetcheri/addVoditel">Добавить водителя</a>
+    <a href="/dispetcheri/deleteVoditel">Удалить водителя</a>
+</div>
+<div style="width: 100%; flex-grow: 1; display: flex">
+    <div style="width: 100%; height: 100%; background-color: gainsboro; flex-grow: 1; padding-left: 10px;">
+        <h2>От: {{poezdka.from_place}}</h2>
+        <h2>Куда: {{poezdka.to_place}}</h2>
+        <h2>Километров: {{poezdka.km}} км</h2>
+        <h2>Цена: {{poezdka.price}} грн</h2>
+        <h2>Время выполнения: {{poezdka.time}} минут</h2>
+        <h2>Номер телефона: {{poezdka.phone}}</h2>
+        {{#if voditel}}
+            <h2>Имя водителя: {{voditel.username}}</h2>
+            <h2>Номер телефона водителя: {{voditel.phone}}</h2>
+            <h2>Машина: {{voditel.car}}</h2>
+        {{/if}}
+        <div style="margin: 0 auto;">
+            <button id="end" class="button" style="cursor: pointer; margin: auto; display: block; transform: translateY(200%);" onclick="end({{poezdka.id}})">Закончить</button>
+        </div>
+    </div>
+</div>
+<script>
+    function end(id) {
+        var body = JSON.stringify({ id: id });
+        fetch('/dispetcheri/deletePoezdka', { body: body, method: 'POST', headers: { "Content-Type": "application/json" } }).then((value) => {
+            window.location.href = value.url;
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TaksOn</string>
+    <string name="ip">https://takson.serverless.social</string>
+</resources>

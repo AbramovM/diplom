@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<head>
+<title>ЗАКАЗ ТАКСИ</title>
+<style>
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .input {
+        margin: 25px auto;
+        width: 350px;
+    }
+    .label-password {
+        display: block;
+        margin: 0 0 10px 10px;
+    }
+    .button {
+        height: 50px;
+        width: 330px;
+        background-color: rgb(190, 190, 190);
+        padding: 0 10px;
+        border-radius: 18px;
+        border-style: none;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        outline: none;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        min-height: 48px;
+    }
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+</head>
+<body style="width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column;">
+<div class="topnav">
+    <a href="/dispetcheri">Гланая</a>
+    <a class="active" href="/dispetcheri/calculate">Новая поездка</a>
+    <a href="/dispetcheri/addVoditel">Добавить водителя</a>
+    <a href="/dispetcheri/deleteVoditel">Удалить водителя</a>
+</div>
+<div style="width: 100%; flex-grow: 1">
+    <div style="height: 100%; width: 33%; min-width: 400px; float: left; background-color: gainsboro;">
+        <form method="POST">
+            <div style="height: 80%; margin: 0 auto;">
+                <div class="input">
+                    <label class="label-password">От:</label>
+                    <input class="button" id="from" type="text" class="text" name="from" placeholder="От" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Куда:</label>
+                    <input class="button" id="to" type="text" class="text" name="to" placeholder="Куда" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Километры:</label>
+                    <input class="button" id="km" type="number" step="0.1" class="text" name="km" placeholder="Километры" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Цена:</label>
+                    <input class="button" id="price" type="number" class="text" name="price" placeholder="Цена" tabindex="2" required />
+                </div>
+                <div class="input">
+                    <label class="label-password">Номер телефона:</label>
+                    <input class="button" id="phone" type="text" class="text" name="phone" placeholder="Номер телефона" tabindex="2" required />
+                </div>
+            </div>
+            <div style="margin: 0 auto;">
+                <button class="button" style="cursor: pointer; margin: auto; display: block; transform: translateY(200%);">Продолжить</button>
+            </div>
+        </form>
+    </div>
+    <div id="google" style="height: 100%; width: 67%; float: right;">
+s
+    </div>
+</div>
+<script>
+    var map;
+    function initMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(49.589536, 34.5454954),
+            zoom:15,
+        };
+        map = new google.maps.Map(document.getElementById("google"),mapProp);
+    }
+    {{!-- document.getElementById('from').onchange = function () {
+        var placesService = new google.maps.places.PlacesService(document.getElementById('google'))
+        placesService.textSearch({ query: document.getElementById('from').value }, function (place) {
+            if (place.length > 0) {
+                placesService.textSearch({ query: document.getElementById('to').value }, function (place1) {
+                    if (place1.length > 0) {
+                        var directionService = new google.maps.DirectionsService()
+                        directionService.route({
+                            origin: place,
+                            destination: document.getElementById('to').value,
+                            travelMode: google.maps.TravelMode.BICYCLING
+                        })
+                        console.log(place1);
+                    }
+                });
+            }
+            console.log(place);
+        });
+    } --}}
+    document.getElementById('km').onchange = () => {
+        var km = Number.parseFloat(document.getElementById('km').value);
+        if (!Number.isNaN(km)) {
+            document.getElementById('price').value = Math.round(km * 9.5);
+        }
+    }
+</script>
+</body>
+</html>

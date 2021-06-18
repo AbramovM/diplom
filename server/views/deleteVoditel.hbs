@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<head>
+<title>УДАЛИТЬ ВОДИТЕЛЯ</title>
+<style>
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .input {
+        margin: 25px auto;
+        width: 350px;
+    }
+    .label-password {
+        display: block;
+        margin: 0 0 10px 10px;
+    }
+    .button {
+        height: 50px;
+        width: 330px;
+        background-color: rgb(190, 190, 190);
+        padding: 0 10px;
+        border-radius: 18px;
+        border-style: none;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        outline: none;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        min-height: 48px;
+    }
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    ul h2, ul h3, ul {
+        margin: 0;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=places" async defer></script>
+</head>
+<body style="width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column">
+<div class="topnav">
+    <a href="/dispetcheri">Гланая</a>
+    <a href="/dispetcheri/calculate">Новая поездка</a>
+    <a href="/dispetcheri/addVoditel">Добавить водителя</a>
+    <a class="active" href="/dispetcheri/deleteVoditel">Удалить водителя</a>
+</div>
+<div style="width: 100%; flex-grow: 1; display: flex">
+    <div style="width: 100%; height: 100%; background-color: gainsboro; flex-grow: 1;">
+        <ul style="list-style-type: none; padding: 0; padding-top: 10px;">
+            {{#each voditeli}}
+                <li style="border-bottom: 1px solid; border-top: 1px solid; padding: 8px;"><a href="#" onclick="deleteVoditel({{this.id}})">
+                    <h2>{{this.phone}}</h2>
+                    <h3>{{this.car}}</h3>
+                </a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+<script>
+    function deleteVoditel(id) {
+        var result = confirm('Вы уверены что хотите удалить этого водителя?');
+        if (result === true) {
+            var body = JSON.stringify({ id: id });
+            fetch('/dispetcheri/deleteVoditel', { body: body, method: 'POST', headers: { "Content-Type": "application/json" } }).then((value) => {
+                window.location.href = value.url;
+            })
+        }
+    }
+</script>
+</body>
+</html>
